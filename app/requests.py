@@ -1,92 +1,76 @@
-import urllib.request,json
-from .models import Sources, Articles
+import urllib.request
+import json
+from .models import Source, Article
 
 
 # Getting api key
 api_key = None
+
 # Getting the news base url
 base_url = None
 
-def configure_request(app):
-    global api_key,base_url,news_api_sources_url,news_api_articles_url
-    api_key = app.config['NEWS_API_KEY']
-    news_api_sources_url = app.config['NEWS_API_SOURCES_URL']
-    news_api_articles_url = app.config['NEWS_API_ARTICLES_URL']
+# Getting the article base url
+article_base_url = None
 
-def get_sources():
+def configure_request(app):
+    global api_key,base_url,article_base_url
+    api_key = app.config['NEWS_API_KEY']
+    base_url = app.config['NEWS_API_BASE_URL']
+    article_base_url = app.config['ARTICLES_BASE_URL']
+
+
+def get_sources(category):
     '''
     Function that gets the json response to our url request
     '''
-    get_sources_url = 'https://newsapi.org/v2/sources?apiKey=94d343343a714ec2b5f6a024996fe7d2'
+
+    get_sources_url = base_url.format(category, api_key)
 
     with urllib.request.urlopen(get_sources_url) as url:
         get_sources_data = url.read()
         get_sources_response = json.loads(get_sources_data)
 
-        sources_results = None
+        source_results = None
 
         if get_sources_response['sources']:
-            sources_results_list = get_sources_response['sources']
-            sources_results = process_sources(sources_results_list)
+            source_sources_list = get_sources_response['sources']
+            source_results = process_sources(source_sources_list)
+
+    return source_results
 
 
-    return sources_results
-
-def process_sources(sources_list):
+def process_sources(source_sources_list):
     '''
-    Function  that processes the source result and transform them to a list of Objects
-
-    Args:
-        source_list: A list of dictionaries that contain source details
-
-    Returns :
-        sources_results: A list of source objects
+    Function that takes the sources results and transform them to a list of objects
     '''
-    sources_results = []
-    for sources_item in sources_list:
-        id = sources_item.get('id')
-        name = sources_item.get('name')
-        category = sources_item.get('category')
-        description = sources_item.get('description')
-       
-        if id:
-            sources_object = Sources(id,name,category,description)
-            sources_results.append(sources_object)
 
-    return sources_results
+    source_results = []
+
+    for source_item in source_sources_list:
+        source_id = source_item.get('id')
+        name = source_item.get('name')
+        description = source_item.get('description')
+        url = source_item.get('url')
+        category = source_item.get('category')
+        language = source_item.get('language')
+        country = source_item.get('country')
+
+        if url:
+            source_object = Source(
+                source_id, name, description, url, category, language, country)
+            source_results.append(source_object)
+
+    return source_results
 
 
-def process_articles(articles_list):
+def get_article(article_id):
     '''
-    Function that processes the articles result and transform them to a list of objects
-
-    Args:
-        articles_list:A list of dictionaries that contains articles details
-
-    Returns:
-        articles_results:A list of articles objects
+    Function that gets the articles from the source using the id of the source
     '''
-    articles_results = []
-    for articles_item in articles_list:
-        title = articles_item.get('title')
-        urlToImage = articles_item.get('urlToImage')
-        content = articles_item.get('content')
-        author = articles_item.get('author')
-        publishedAt = articles_item.get('publishedAt')
-        url = articles_item.get('url')
-        # import pdb
-        # pdb.set_trace()
-        if title:
-            articles_object = Articles(title,content,urlToImage,author,publishedAt,url)
-            articles_results.append(articles_object)
 
-    return articles_results
+    get_articles_url = article_base_url.format(article_id, api_key)
 
-def get_articles(sources_id):
-    '''
-    Function that gets the json results to our url request
-    '''
-    get_articles_url = 'https://newsapi.org/v2/top-headlines?sources={}&apiKey=94d343343a714ec2b5f6a024996fe7d2'.format(sources_id,api_key)
+    print(get_articles_url)
 
     with urllib.request.urlopen(get_articles_url) as url:
         get_articles_data = url.read()
@@ -95,8 +79,35 @@ def get_articles(sources_id):
         articles_results = None
 
         if get_articles_response['articles']:
-            articles_results_list = get_articles_response['articles']
-            articles_results = process_articles(articles_results_list)
-    
+            article_articles_list = get_articles_response['articles']
+            articles_results = process_articles(article_articles_list)
+
+        # print(get_articles_response)
+        print(articles_results)
 
     return articles_results
+
+
+def process_articles(article_articles_list):
+    '''
+    Function that takes the sources results and transform them to a list of objects
+    '''
+
+    article_results = []
+
+    for article_item in article_articles_list:
+        article_id = article_item.get('id')
+        author = article_item.get('author')
+        title = article_item.get('title')
+        description = article_item.get('description')
+        url = article_item.get('url')
+        urlToImage = article_item.get('urlToImage')
+        publishedAt = article_item.get('publishedAt')
+        content = article_item.get('content')
+
+        if urlToImage:
+            article_object = Article(
+                article_id, author, title, description, url, urlToImage, publishedAt, content)
+            article_results.append(article_object)
+
+    return article_results

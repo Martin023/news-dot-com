@@ -13,18 +13,26 @@ def home():
     View root page function that returns the index page and its data
     '''
 
-    # Getting news articles
-    sources = get_sources()
-    title = 'news.com'
+    general_source = get_sources('general')
+    business_source = get_sources('business')
+    technology_source = get_sources('technology')
+    sports_source = get_sources('sports')
+    entertainment_source = get_sources('entertainment')
+    health_source = get_sources('health')
+    science_source = get_sources('science')
 
-    return render_template('index.html',title = title, sources = sources)
+    title = 'News'
+    return render_template('index.html', title=title, general=general_source, business=business_source, sports=sports_source, entertainment=entertainment_source, health=health_source, science=science_source, technology=technology_source)
 
 
-@app.route('/articles/<sources_id>')
-def articles(sources_id):
+@app.route('/article/<article_id>')
+def articles(article_id):
     '''
-    View articles page function that returns the  article details page and its data
+    View article page function that returns the articles under the source
+
     '''
-    articles = get_article(sources_id)
-    
-    return render_template('articles.html',articles = articles)
+
+    articles = get_article(article_id)
+    print(articles)
+
+    return render_template('article.html', id=article_id, articles=articles)

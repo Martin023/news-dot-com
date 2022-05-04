@@ -42,3 +42,10 @@ and also read news from various news sources.
 * Bootstrap.
 * Your favorite python code editor.
 
+## Contact info
+Reach me through my website at: https://martin023.github.io/portfolio/
+
+## License 
+MIT licence 
+Copyright 2022.
+

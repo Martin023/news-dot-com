@@ -18,6 +18,8 @@ hr{
     background: rgb(0, 0, 0);
     max-width: 200px;
     size: 1ch;
+}
+.buttons{
     
- 
+    bottom: 0px;
 }

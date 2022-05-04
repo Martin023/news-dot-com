@@ -2,8 +2,8 @@
 
 from flask import render_template,request,redirect,url_for
 from . import main
-from app import app
-from .requests import get_sources,get_article
+# from app import app
+from ..requests import get_sources,get_article
 
 
 @main.route('/')
@@ -26,7 +26,7 @@ def home():
     return render_template('index.html', title=title, general=general_source, business=business_source, sports=sports_source, entertainment=entertainment_source, health=health_source, science=science_source, technology=technology_source)
 
 
-@app.route('/article/<article_id>')
+@main.route('/article/<article_id>')
 def articles(article_id):
     '''
     View article page function that returns the articles under the source

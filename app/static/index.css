@@ -1,6 +1,6 @@
 .card {
     width:30%;
-    
+    position: relative;
     
     border-radius: 10px; 
     gap:20px;
@@ -12,6 +12,7 @@
     display:flex;
     max-width: 100vw;
     flex-wrap: wrap;
+    justify-items: center;
     
 }
 hr{
@@ -20,6 +21,6 @@ hr{
     size: 1ch;
 }
 .buttons{
-    
-    bottom: 0px;
+    position:absolute;
+    bottom: 3px;
 }

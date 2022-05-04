@@ -25,6 +25,7 @@ A web application that users can use to check for trending news
 and also read news from various news sources.
 
 ## Screenshot of the page
+![news](https://user-images.githubusercontent.com/36125591/166700368-f9a3b633-e55e-418c-adf9-eda312923605.png)
 
 
 ### BDD

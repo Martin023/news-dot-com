@@ -1,0 +1,23 @@
+.card {
+    width:30%;
+    
+    
+    border-radius: 10px; 
+    gap:20px;
+    align-items: start;
+    margin-bottom: 5%;
+    box-shadow:  5px 10px rgb(220, 215, 215);
+}
+.all-gen-items{
+    display:flex;
+    max-width: 100vw;
+    flex-wrap: wrap;
+    
+}
+hr{
+    background: rgb(0, 0, 0);
+    max-width: 200px;
+    size: 1ch;
+    
+ 
+}

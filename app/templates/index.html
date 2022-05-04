@@ -5,49 +5,68 @@
 
 {% block styles%}
     {{ super() }}
-    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='index.css')}}">
 {% endblock %}
 
 <!-- Content block -->
 {% block content %}
-<div class="container text-center" id="sourcess">
-    <h1 class="text-center" style="font-size: 40px; background-color:burlywood;"><strong>Welcome to the best News website of this century</strong></h1>
+<div class="container-fluid text-center" id="sourcess">
+    <div class="container">
+        <h3 class="text-center" >Welcome to news in an instant</h3>
     <hr>
+    </div>
+    
     <!--General Sources section-->
-    <h2 style="font-size: 40px; background-color: rgb(190, 120, 120);"><u><strong>General Sources</strong></u></h2>
-    <p>
-        {{macro.displayNewsSources(general)}}   
-    </p>
+    <h2> General Sources</h2>
+    <div class="all-gen-items">
+        
+            {{macro.displayNewsSources(general)}} 
+        
+    </div>
+       
+    
     <!--Business Sources section-->
-    <h2 style="font-size: 40px; background-color: rgb(190, 120, 120);"><u><strong>Business Sources</strong></u></h2>
-    <p>
-        {{macro.displayNewsSources(business)}}
-    </p>
+    <h2 id="business" >Business Sources</h2>
+    <div class="all-gen-items">
+        <p>
+            {{macro.displayNewsSources(business)}}
+        </p>
+    </div>
     <!--Technology Sources section-->
-    <h2 style="font-size: 40px; background-color: rgb(190, 120, 120);"><u><strong>Technology Sources</strong></u></h2>
-    <p>
-        {{macro.displayNewsSources(technology)}}
-    </p>
+    <h2 id="technology">Technology Sources</h2>
+    <div class="all-gen-items">
+        <p>
+            {{macro.displayNewsSources(technology)}}
+        </p>
+    </div>
     <!--Sports Sources section-->
-    <h2 style="font-size: 40px; background-color: rgb(190, 120, 120);"><u><strong>Sports Sources</strong></u></h2>
-    <p>
-        {{macro.displayNewsSources(sports)}}
-    </p>
+    <h2 id="sports">Sports Sources</h2>
+    <div class="all-gen-items">
+        
+        {{macro.displayNewsSources(sports)}} 
+    
+</div>
     <!--Entertainment Sources section-->
-    <h2 style="font-size: 40px; background-color: rgb(190, 120, 120);"><u><strong>Entertainment Sources</strong></u></h2>
-    <p>
-        {{macro.displayNewsSources(entertainment)}}
-    </p>
+    <h2 id="ent">Entertainment Sources</h2>
+    <div class="all-gen-items">
+        
+        {{macro.displayNewsSources(entertainment)}} 
+    
+</div>
     <!--Health Sources section-->
-    <h2 style="font-size: 40px; background-color: rgb(190, 120, 120);"><u><strong>Health Sources</strong></u></h2>
-    <p>
-        {{macro.displayNewsSources(health)}}
-    </p>
+    <h2 id="health">Health Sources</h2>
+    <div class="all-gen-items">
+        
+        {{macro.displayNewsSources(health)}} 
+    
+    </div>
     <!--Science Sources section-->
-    <h2 style="font-size: 40px; background-color: rgb(190, 120, 120);"><u><strong>Science Sources</strong></u></h2>
-    <p>
-        {{macro.displayNewsSources(science)}}
-    </p>
+    <h2 id="science">Science Sources</h2>
+    <div class="all-gen-items">
+        
+        {{macro.displayNewsSources(science)}} 
+    
+    </div>
 
 </div>
 

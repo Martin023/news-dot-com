@@ -1,18 +1,21 @@
 {% macro displayNewsSources(source_sources_list) %}
 
 {% for source in source_sources_list %}
-    <strong><p style="font-size: 30px;">{{ source.name}}</p></strong>
-    <p style="font-size: 20px;">{{source.description}}</p>
-    <div class="row">
-        <div class="col-md-6">
-            <a href="{{source.url}}" target="_blank" class="btn btn-success"><strong>Visit Source {{source.id}}</strong></a>
+    <div class="card">
+        <strong><p style="font-size: 30px; text-align: start;">{{ source.name}}</p></strong>
+        <p style="font-size: 20px;text-align: start;">{{source.description}}</p>
+        <div class="row buttons">
+            <div class="col-md-6">
+                <a href="{{source.url}}" target="_blank" class="btn btn-success"><strong>Visit Source {{source.id}}</strong></a>
+            </div>
+            <div class="col-md-6">
+                <a href="/article/{{source.source_id}}" class="btn btn-warning" target="_blank" >
+                    <strong>View Source Articles</strong></a>
+            </div>
         </div>
-        <div class="col-md-6">
-            <a href="/article/{{source.source_id}}" class="btn btn-warning" target="_blank" >
-                <strong>View Source Articles</strong></a>
-        </div>
+        
     </div>
-    
+   
     <hr>
 {% endfor %}
 

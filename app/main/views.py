@@ -1,11 +1,12 @@
 # Render temp that renders our views
 
-from flask import render_template
+from flask import render_template,request,redirect,url_for
+from . import main
 from app import app
 from .requests import get_sources,get_article
 
 
-@app.route('/')
+@main.route('/')
 
 def home():
     

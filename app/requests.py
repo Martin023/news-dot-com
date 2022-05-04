@@ -67,9 +67,9 @@ def get_article(article_id):
     Function that gets the articles from the source using the id of the source
     '''
 
-    get_articles_url = article_base_url.format(article_id, api_key)
+    get_articles_url = 'https://newsapi.org/v2/top-headlines?apiKey=94d343343a714ec2b5f6a024996fe7d2source?'
 
-    print(get_articles_url)
+    
 
     with urllib.request.urlopen(get_articles_url) as url:
         get_articles_data = url.read()
